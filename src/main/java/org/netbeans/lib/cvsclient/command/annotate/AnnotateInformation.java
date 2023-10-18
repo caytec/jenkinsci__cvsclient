@@ -50,6 +50,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -152,7 +153,7 @@ public class AnnotateInformation extends FileInfoContainer {
     protected void addToTempFile(final String line) throws IOException {
         if (tempOutStream == null) {
             try {
-                tempFile = File.createTempFile("ann", ".cvs", tempDir); // NOI18N
+                tempFile = Files.createTempFile(tempDir.toPath(), "ann", ".cvs").toFile(); // NOI18N
                 tempFile.deleteOnExit();
                 tempOutStream = new BufferedOutputStream(new FileOutputStream(tempFile));
             } catch (final IOException ex) {

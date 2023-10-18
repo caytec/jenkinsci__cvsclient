@@ -53,7 +53,7 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.LineNumberReader;
-
+import java.nio.file.Files;
 import org.junit.Test;
 import org.netbeans.lib.cvsclient.admin.StandardAdminHandler;
 import org.netbeans.lib.cvsclient.command.GlobalOptions;
@@ -79,7 +79,7 @@ public class RlogTest {
         System.setProperty("cvsClientLog", protocolLog);
         System.out.println(protocolLog);
 
-        final File requestsLog = File.createTempFile("requests", null, tmpDir);
+        final File requestsLog = Files.createTempFile(tmpDir.toPath(), "requests", null).toFile();
 
         final Exception testException[] = new Exception[1];
         final boolean completedFlag[] = new boolean[] {false};

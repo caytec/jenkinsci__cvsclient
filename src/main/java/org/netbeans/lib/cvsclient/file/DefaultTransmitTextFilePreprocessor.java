@@ -51,6 +51,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.file.Files;
 import java.util.Arrays;
 
 /**
@@ -72,7 +73,7 @@ public class DefaultTransmitTextFilePreprocessor implements TransmitTextFilePrep
     public File getPreprocessedTextFile(final File originalTextFile) throws IOException {
         // must write file to temp location first because size might change
         // due to CR/LF changes
-        final File preprocessedTextFile = File.createTempFile("cvs", null, tempDir); // NOI18N
+        final File preprocessedTextFile = Files.createTempFile(tempDir.toPath(), "cvs", null).toFile(); // NOI18N
 
         final byte[] newLine = System.getProperty("line.separator").getBytes();
         final boolean doConversion = (newLine.length != 1) || (newLine[0] != '\n');

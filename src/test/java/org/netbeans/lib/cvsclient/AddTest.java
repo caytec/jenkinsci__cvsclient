@@ -54,7 +54,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.LineNumberReader;
 import java.io.OutputStream;
-
+import java.nio.file.Files;
 import org.junit.Test;
 import org.junit.Ignore;
 import org.netbeans.lib.cvsclient.admin.StandardAdminHandler;
@@ -88,7 +88,7 @@ public class AddTest {
         System.out.println(protocolLog);
 
         final PseudoCvsServer cvss = new PseudoCvsServer("protocol/iz36289.in");
-        File requestsLog = File.createTempFile("requests", null, tmpDir);
+        File requestsLog = Files.createTempFile(tmpDir.toPath(), "requests", null).toFile();
         cvss.logRequests(new FileOutputStream(requestsLog));
         Thread cvssThread = new Thread(cvss);
         cvssThread.start();

@@ -49,6 +49,7 @@ package org.netbeans.lib.cvsclient.command.update;
 import java.io.EOFException;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.text.MessageFormat;
 import java.util.Date;
 import java.util.HashSet;
@@ -480,7 +481,7 @@ public class UpdateCommand extends BasicCommand implements TemporaryFileCreator 
      * Method that creates a temporary file.
      */
     public File createTempFile(final String filename) throws IOException {
-        final File temp = File.createTempFile("cvs", ".dff", getGlobalOptions().getTempDir()); // NOI18N
+        final File temp = Files.createTempFile(getGlobalOptions().getTempDir().toPath(), "cvs", ".dff").toFile(); // NOI18N
         temp.deleteOnExit();
         return temp;
     }

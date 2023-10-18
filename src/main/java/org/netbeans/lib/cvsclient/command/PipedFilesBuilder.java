@@ -45,6 +45,7 @@ package org.netbeans.lib.cvsclient.command;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 
 import org.netbeans.lib.cvsclient.event.EventManager;
 import org.netbeans.lib.cvsclient.event.FileInfoEvent;
@@ -116,7 +117,7 @@ public class PipedFilesBuilder implements Builder, BinaryBuilder {
             // XXX it might be dangerous because PipedFileInformation stays
             // partialy unitialized
             try {
-                fileInformation = new PipedFileInformation(File.createTempFile("checkout", null));
+                fileInformation = new PipedFileInformation(Files.createTempFile("checkout", null).toFile());
             } catch (final IOException e) {
                 e.printStackTrace();
             }
@@ -154,7 +155,7 @@ public class PipedFilesBuilder implements Builder, BinaryBuilder {
                 // XXX it might be dangerous because PipedFileInformation stays
                 // partialy unitialized
                 try {
-                    fileInformation = new PipedFileInformation(File.createTempFile("checkout", null));
+                    fileInformation = new PipedFileInformation(Files.createTempFile("checkout", null).toFile());
                 } catch (final IOException e) {
                     e.printStackTrace();
                 }

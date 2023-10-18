@@ -50,6 +50,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -160,7 +161,7 @@ public final class PasswordsFile {
                 writer.write(cvsRootString + " " + encodedPassword + LF);
                 writer.close();
             } else {
-                final File tempFile = File.createTempFile("cvs", "tmp");
+                final File tempFile = Files.createTempFile("cvs", "tmp").toFile();
                 reader = new BufferedReader(new FileReader(passFile));
                 writer = new BufferedWriter(new FileWriter(tempFile));
                 String line;

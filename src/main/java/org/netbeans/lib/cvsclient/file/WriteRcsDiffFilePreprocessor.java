@@ -53,6 +53,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PushbackInputStream;
+import java.nio.file.Files;
 
 import org.netbeans.lib.cvsclient.util.BugLog;
 import org.netbeans.lib.cvsclient.util.ByteArray;
@@ -126,7 +127,7 @@ public class WriteRcsDiffFilePreprocessor implements WriteTextFilePreprocessor {
         try {
             tempDiffReader = new ReadInfo(new BufferedInputStream(processedInput));
             tempFileReader = new ReadInfo(new BufferedInputStream(new FileInputStream(fileToWrite)));
-            tempFile = File.createTempFile(".#merg", "cvs"); // NOI18N
+            tempFile = Files.createTempFile(".#merg", "cvs").toFile(); // NOI18N
 
             out = new BufferedOutputStream(new FileOutputStream(tempFile));
 

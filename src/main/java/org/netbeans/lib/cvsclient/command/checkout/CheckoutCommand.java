@@ -49,6 +49,7 @@ package org.netbeans.lib.cvsclient.command.checkout;
 import java.io.EOFException;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -713,7 +714,7 @@ public class CheckoutCommand extends BasicCommand implements TemporaryFileCreato
     }
 
     public File createTempFile(final String filename) throws IOException {
-        final File temp = File.createTempFile("cvs", ".dff", getGlobalOptions().getTempDir()); // NOI18N
+        final File temp = Files.createTempFile(getGlobalOptions().getTempDir().toPath(), "cvs", ".dff").toFile(); // NOI18N
         temp.deleteOnExit();
         return temp;
     }

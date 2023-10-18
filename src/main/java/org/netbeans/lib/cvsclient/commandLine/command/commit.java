@@ -52,6 +52,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
 
 import org.netbeans.lib.cvsclient.command.Command;
 import org.netbeans.lib.cvsclient.command.GlobalOptions;
@@ -91,7 +92,7 @@ public class commit extends AbstractCommandProvider {
         BufferedReader templateReader = null;
         BufferedWriter writer = null;
         try {
-            final File tempFile = File.createTempFile("cvsTemplate", "txt", tmpDir);
+            final File tempFile = Files.createTempFile(tmpDir.toPath(), "cvsTemplate", "txt").toFile();
             writer = new BufferedWriter(new FileWriter(tempFile));
 
             if ((args != null) && (args.length > 0)) {

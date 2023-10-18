@@ -56,6 +56,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.Reader;
+import java.nio.file.Files;
 import java.util.Date;
 
 import org.netbeans.lib.cvsclient.command.GlobalOptions;
@@ -345,7 +346,7 @@ public class DefaultFileHandler implements FileHandler {
         // perform a sequence of readLines() until we've read the file from
         // the server - the file transmission is not followed by a newline.
         // Bah.
-        final File tempFile = File.createTempFile("cvsCRLF", "tmp"); // NOI18N
+        final File tempFile = Files.createTempFile("cvsCRLF", "tmp").toFile(); // NOI18N
 
         try {
             OutputStream os = null;
@@ -434,7 +435,7 @@ public class DefaultFileHandler implements FileHandler {
         // the interface to allow this stage to be optional
         final File cvsDir = new File(file.getParentFile(), "CVS");
         cvsDir.mkdir();
-        final File tempFile = File.createTempFile("cvsPostConversion", "tmp", cvsDir); // NOI18N
+        final File tempFile = Files.createTempFile(cvsDir.toPath(), "cvsPostConversion", "tmp").toFile(); // NOI18N
 
         try {
             BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(tempFile));
